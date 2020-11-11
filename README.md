@@ -2,4 +2,13 @@
 
 Criado pelo Facebook.
 
-> Assertions: determinar se o resultado de um método, é exatamente o que estou esperando.
+> ASSERTIONS: determinar se o resultado de um método, é exatamente o que estou esperando.
+
+`npm test`
+- testMach: regex que busca recursivamente arquivos de test (inclusive jsx) dentro da pasta 'tests' ou fora dela.
+
+> Para evitar falso positivo, utilize o método `.not` do `expect`. 
+
+### Jest Snippets (VSCode)
+
+- https://marketplace.visualstudio.com/items?itemName=andys8.jest-snippets
