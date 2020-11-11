@@ -6,6 +6,34 @@ describe('Object to query string', () => {
       name: 'Roger Rabbit',
       company: 'ACME',
     };
+
     expect(queryString(obj)).toBe('name=Roger Rabbit&company=ACME');
+  });
+
+  it('should create a valid query string when an array is provided', () => {
+    const obj = {
+      name: 'Roger Rabbit',
+      company: 'ACME',
+      personality: ['zany', 'kind-hearted', 'humorous', 'energetic'],
+    };
+
+    expect(queryString(obj)).toBe(
+      'name=Roger Rabbit&company=ACME&personality=zany,kind-hearted,humorous,energetic',
+    );
+  });
+
+  it('should throw an error if object is passed as value', () => {
+    const obj = {
+      name: 'Roger Rabbit',
+      company: 'ACME',
+      personality: {
+        0: 'zany',
+        1: 'kind-hearted',
+        2: 'humorous',
+        3: 'energetic',
+      },
+    };
+
+    expect(() => queryString(obj)).toThrowError();
   });
 });
