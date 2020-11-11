@@ -20,4 +20,4 @@ Criado pelo Facebook.
 
 - Olha apenas o que foi alterado, e não todos os testes: `jest --watchAll`
 
-![https://i.imgur.com/6AUzRWz.png](jest --watchAll)
+![jest --watchAll](https://i.imgur.com/6AUzRWz.png)
