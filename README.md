@@ -9,6 +9,8 @@ Criado pelo Facebook.
 
 > Para evitar falso positivo, utilize o método `.not` do `expect`. É possível ter mais de um `expect` dentro de um `it`
 
+- `toBe` x `toEqual`
+
 ### Jest Snippets (VSCode)
 
 - https://marketplace.visualstudio.com/items?itemName=andys8.jest-snippets
