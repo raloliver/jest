@@ -21,3 +21,12 @@ Criado pelo Facebook.
 - Olha apenas o que foi alterado, e não todos os testes: `jest --watchAll`
 
 ![jest --watchAll](https://i.imgur.com/6AUzRWz.png)
+
+
+### Coverage
+
+- Branch: quando temos condicionais (if/else)
+- Muito útil para verificar se algo falta ser testado
+- O mínimo para cobertura de teste é de 80%
+
+> Melhor ter testes de qualidade do que cobertura de testes
