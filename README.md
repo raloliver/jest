@@ -30,3 +30,12 @@ Criado pelo Facebook.
 - O mínimo para cobertura de teste é de 80%
 
 > Melhor ter testes de qualidade do que cobertura de testes
+
+### NodeJS 12 para NodeJS 13
+
+> O commonjs, onde utilizamos o module.exports e importamos usando o require, é o padrão até o NodeJS12, a partir do NodeJS13, já foi adotada o ES6 modules, que é a implementação nativa do JS para imports and exports.
+
+### Babel 
+
+- Necessário para utilização da syntax ES2015+ ([Docs](https://jestjs.io/docs/en/getting-started#using-babel))
+- Ambos os tipos de import de módulos podem co-existir
