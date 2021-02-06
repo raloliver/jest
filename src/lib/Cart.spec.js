@@ -7,6 +7,11 @@ describe('Cart', () => {
     price: 26325,
   };
 
+  let product1 = {
+    title: 'Óculos Rift',
+    price: 300000,
+  };
+
   beforeEach(() => {
     cart = new Cart();
   });

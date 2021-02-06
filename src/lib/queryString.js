@@ -6,11 +6,12 @@ const keyValueToString = ([key, value]) => {
   return `${key}=${value}`;
 };
 
-export function queryString(obj)
-  {   return Object.entries(obj).map(keyValueToString).join('&');   }
+export function queryString(obj) {
+  return Object.entries(obj).map(keyValueToString).join('&');
+}
 
-export function parseQueryString(string)
-  {   return Object.fromEntries(
+export function parseQueryString(string) {
+  return Object.fromEntries(
     string.split('&').map(item => {
       let [key, value] = item.split('=');
 
@@ -20,4 +21,5 @@ export function parseQueryString(string)
 
       return [key, value];
     }),
-  );   }
+  );
+}
