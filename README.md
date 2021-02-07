@@ -39,3 +39,12 @@ Criado pelo Facebook.
 
 - Necessário para utilização da syntax ES2015+ ([Docs](https://jestjs.io/docs/en/getting-started#using-babel))
 - Ambos os tipos de import de módulos podem co-existir
+
+> Se você perceber que existem muitos `describe` talvez seja a hora de separar o arquivos em pedaços menores.
+
+### toMatchInlineSnapshot() e toMatchSnapshot()
+
+- Use o `prettier` (`npm i -D prettier`) para adicionar mocks automaticamente.
+- Se for necessário alterar o `act` do teste, tenha atenção, e faça a atualização do `assert` automaticamente (apenas clique em "Replace them"):
+![Update assert](https://i.imgur.com/t3JDrDn.png)
+- `toMatchSnapshot()` utilize para colocar o snapshot num arquivo separado
