@@ -4,12 +4,12 @@ describe('Cart', () => {
   let cart;
   let product = {
     title: 'Nintendo Switch',
-    price: 26325,
+    price: 263,
   };
 
   let product1 = {
     title: 'Óculos Rift',
-    price: 300000,
+    price: 300,
   };
 
   beforeEach(() => {
@@ -28,7 +28,7 @@ describe('Cart', () => {
     };
 
     cart.add(item);
-    expect(cart.getTotal()).toEqual(52650);
+    expect(cart.getTotal()).toEqual(526);
   });
 
   it('should ensure only one type of product on the cart', () => {
@@ -40,6 +40,19 @@ describe('Cart', () => {
       product,
       quantity: 1,
     });
-    expect(cart.getTotal()).toEqual(26325);
+    expect(cart.getTotal()).toEqual(263);
+  });
+
+  it('should update total when a product gets included and then removed', () => {
+    cart.add({
+      product,
+      quantity: 2,
+    });
+    cart.add({
+      product: product1,
+      quantity: 2,
+    });
+    cart.remove(product);
+    expect(cart.getTotal()).toEqual(600);
   });
 });
