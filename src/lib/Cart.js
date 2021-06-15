@@ -2,7 +2,7 @@
  * File: Cart.js
  * Project: jest-app
  * Created: Thursday, March 11th 2021, 5:12:26 pm
- * Last Modified: Tuesday, June 15th 2021, 5:54:52 pm
+ * Last Modified: Tuesday, June 15th 2021, 6:00:27 pm
  * Copyright © 2021 AMDE Agência
  */
 
@@ -60,8 +60,7 @@ export default class Cart {
       let discount = Money({amount: 0});
 
       if (
-        item.condition &&
-        item.condition.percentage &&
+        item.condition?.percentage &&
         item.quantity > item.condition.minimum
       ) {
         discount = amount.percentage(item.condition.percentage);
