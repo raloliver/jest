@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Cart checkout should return an object with the total and the items 1`] = `
+Object {
+  "items": Array [
+    Object {
+      "product": Object {
+        "price": 263,
+        "title": "Nintendo Switch",
+      },
+      "quantity": 2,
+    },
+    Object {
+      "product": Object {
+        "price": 300,
+        "title": "Óculos Rift",
+      },
+      "quantity": 5,
+    },
+  ],
+  "total": 2026,
+}
+`;
+
+exports[`Cart checkout should return an object with the total and the items when summary() 1`] = `
+Object {
+  "items": Array [
+    Object {
+      "product": Object {
+        "price": 263,
+        "title": "Nintendo Switch",
+      },
+      "quantity": 2,
+    },
+    Object {
+      "product": Object {
+        "price": 300,
+        "title": "Óculos Rift",
+      },
+      "quantity": 1,
+    },
+  ],
+  "total": 826,
+}
+`;
