@@ -2,7 +2,7 @@
  * File: Cart.spec.js
  * Project: jest-app
  * Created: Thursday, March 11th 2021, 5:12:26 pm
- * Last Modified: Tuesday, June 15th 2021, 5:52:50 pm
+ * Last Modified: Thursday, June 17th 2021, 2:17:43 pm
  * Copyright © 2021 AMDE Agência
  */
 
@@ -101,7 +101,7 @@ describe('Cart', () => {
   });
 
   describe('special promos', () => {
-    it('apply discount when is above mininum', () => {
+    it('should apply discount when is above mininum', () => {
       const condition = {
         percentage: 10,
         minimum: 2,
@@ -114,6 +114,63 @@ describe('Cart', () => {
       });
 
       expect(cart.getTotal().getAmount()).toEqual(710);
+    });
+
+    it('should NOT apply discount when quantity is below or equals to mininum', () => {
+      const condition = {
+        percentage: 10,
+        minimum: 2,
+      };
+
+      cart.add({
+        product,
+        condition,
+        quantity: 2,
+      });
+
+      expect(cart.getTotal().getAmount()).toEqual(526);
+    });
+
+    it('should apply quantity discount for even quantities', () => {
+      const condition = {
+        quantity: 2,
+      };
+
+      cart.add({
+        product,
+        condition,
+        quantity: 4,
+      });
+
+      expect(cart.getTotal().getAmount()).toEqual(526);
+    });
+
+    it('should apply discount for odd quantities', () => {
+      const condition = {
+        quantity: 2,
+      };
+
+      cart.add({
+        product,
+        condition,
+        quantity: 5,
+      });
+
+      expect(cart.getTotal().getAmount()).toEqual(789);
+    });
+
+    it('should not apply quantity discount for even quantities when the condition is not met', () => {
+      const condition = {
+        quantity: 2,
+      };
+
+      cart.add({
+        product,
+        condition,
+        quantity: 1,
+      });
+
+      expect(cart.getTotal().getAmount()).toEqual(263);
     });
   });
 });

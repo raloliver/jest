@@ -2,14 +2,31 @@
  * File: Cart.js
  * Project: jest-app
  * Created: Thursday, March 11th 2021, 5:12:26 pm
- * Last Modified: Tuesday, June 15th 2021, 6:00:27 pm
+ * Last Modified: Thursday, June 17th 2021, 2:08:07 pm
  * Copyright © 2021 AMDE Agência
  */
 
 import find from 'lodash/find';
 import remove from 'lodash/remove';
-
 import Dinero from 'dinero.js';
+
+const calculateDiscountByPercentage = (amount, item) => {
+  if (item.condition?.percentage && item.quantity > item.condition.minimum) {
+    return amount.percentage(item.condition.percentage);
+  }
+
+  return Money({amount: 0});
+};
+
+const calculateDiscountByQuantity = (amount, item) => {
+  const isEven = item.quantity % 2 === 0;
+
+  if (item.condition?.quantity && item.quantity > item.condition.quantity) {
+    return amount.percentage(isEven ? 50 : 40);
+  }
+
+  return Money({amount: 0});
+};
 
 const Money = Dinero;
 
@@ -59,11 +76,10 @@ export default class Cart {
       const amount = Money({amount: item.quantity * item.product.price});
       let discount = Money({amount: 0});
 
-      if (
-        item.condition?.percentage &&
-        item.quantity > item.condition.minimum
-      ) {
-        discount = amount.percentage(item.condition.percentage);
+      if (item.condition?.percentage) {
+        discount = calculateDiscountByPercentage(amount, item);
+      } else if (item.condition?.quantity) {
+        discount = calculateDiscountByQuantity(amount, item);
       }
 
       return acc.add(amount).subtract(discount);
