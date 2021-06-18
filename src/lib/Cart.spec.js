@@ -2,7 +2,7 @@
  * File: Cart.spec.js
  * Project: jest-app
  * Created: Thursday, March 11th 2021, 5:12:26 pm
- * Last Modified: Friday, June 18th 2021, 3:03:28 pm
+ * Last Modified: Friday, June 18th 2021, 3:07:00 pm
  * Copyright © 2021 AMDE Agência
  */
 

@@ -2,7 +2,7 @@
  * File: Cart.js
  * Project: jest-app
  * Created: Thursday, March 11th 2021, 5:12:26 pm
- * Last Modified: Friday, June 18th 2021, 3:03:09 pm
+ * Last Modified: Friday, June 18th 2021, 3:10:41 pm
  * Copyright © 2021 AMDE Agência
  */
 
@@ -10,18 +10,18 @@ import find from 'lodash/find';
 import remove from 'lodash/remove';
 import Dinero from 'dinero.js';
 
-const calculateDiscountByPercentage = (amount, item) => {
-  if (item.condition?.percentage && item.quantity > item.condition.minimum) {
-    return amount.percentage(item.condition.percentage);
+const calculateDiscountByPercentage = (amount, {condition, quantity}) => {
+  if (condition?.percentage && quantity > condition.minimum) {
+    return amount.percentage(condition.percentage);
   }
 
   return Money({amount: 0});
 };
 
-const calculateDiscountByQuantity = (amount, item) => {
-  const isEven = item.quantity % 2 === 0;
+const calculateDiscountByQuantity = (amount, {condition, quantity}) => {
+  const isEven = quantity % 2 === 0;
 
-  if (item.condition?.quantity && item.quantity > item.condition.quantity) {
+  if (condition?.quantity && quantity > condition.quantity) {
     return amount.percentage(isEven ? 50 : 40);
   }
 
@@ -94,12 +94,12 @@ export default class Cart {
   }
 
   getTotal() {
-    return this.items.reduce((acc, item) => {
-      const amount = Money({amount: item.quantity * item.product.price});
+    return this.items.reduce((acc, {quantity, product, condition}) => {
+      const amount = Money({amount: quantity * product.price});
       let discount = Money({amount: 0});
 
-      if (item.condition) {
-        discount = calculateDiscount(amount, item.quantity, item.condition);
+      if (condition) {
+        discount = calculateDiscount(amount, quantity, condition);
       }
 
       return acc.add(amount).subtract(discount);
