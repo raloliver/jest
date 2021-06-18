@@ -1,5 +1,20 @@
+/*
+ * File: Cart.js
+ * Project: jest-app
+ * Created: Thursday, March 11th 2021, 5:12:26 pm
+ * Last Modified: Friday, June 18th 2021, 3:22:59 pm
+ * Copyright © 2021 AMDE Agência
+ */
+
 import find from 'lodash/find';
 import remove from 'lodash/remove';
+import Dinero from 'dinero.js';
+import {calculateDiscount} from './discount.utils';
+
+const Money = Dinero;
+
+Money.defaultCurrency = 'EUR';
+Money.defaultPrecision = 2;
 
 export default class Cart {
   items = [];
@@ -20,10 +35,12 @@ export default class Cart {
 
   summary() {
     const total = this.getTotal();
+    const formatted = total.toFormat('$0,0.00');
     const items = this.items;
 
     return {
       total,
+      formatted,
       items,
     };
   }
@@ -34,14 +51,21 @@ export default class Cart {
     this.items = [];
 
     return {
-      total,
+      total: total.getAmount(),
       items,
     };
   }
 
   getTotal() {
-    return this.items.reduce((acc, item) => {
-      return acc + item.quantity * item.product.price;
-    }, 0);
+    return this.items.reduce((acc, {quantity, product, condition}) => {
+      const amount = Money({amount: quantity * product.price});
+      let discount = Money({amount: 0});
+
+      if (condition) {
+        discount = calculateDiscount(amount, quantity, condition);
+      }
+
+      return acc.add(amount).subtract(discount);
+    }, Money({amount: 0}));
   }
 }

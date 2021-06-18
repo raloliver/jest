@@ -1,3 +1,11 @@
+/*
+ * File: calculator.spec.js
+ * Project: jest-app
+ * Created: Thursday, March 11th 2021, 5:12:26 pm
+ * Last Modified: Tuesday, June 15th 2021, 5:37:13 pm
+ * Copyright © 2021 AMDE Agência
+ */
+
 import { sum } from './calculator';
 
 it('should sum 2 and 2 and the result must be 4', () => {

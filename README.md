@@ -22,7 +22,6 @@ Criado pelo Facebook.
 
 ![jest --watchAll](https://i.imgur.com/6AUzRWz.png)
 
-
 ### Coverage
 
 - Branch: quando temos condicionais (if/else)
@@ -35,7 +34,7 @@ Criado pelo Facebook.
 
 > O commonjs, onde utilizamos o module.exports e importamos usando o require, é o padrão até o NodeJS12, a partir do NodeJS13, já foi adotada o ES6 modules, que é a implementação nativa do JS para imports and exports.
 
-### Babel 
+### Babel
 
 - Necessário para utilização da syntax ES2015+ ([Docs](https://jestjs.io/docs/en/getting-started#using-babel))
 - Ambos os tipos de import de módulos podem co-existir
@@ -46,5 +45,9 @@ Criado pelo Facebook.
 
 - Use o `prettier` (`npm i -D prettier`) para adicionar mocks automaticamente.
 - Se for necessário alterar o `act` do teste, tenha atenção, e faça a atualização do `assert` automaticamente (apenas clique em "Replace them"):
-![Update assert](https://i.imgur.com/t3JDrDn.png)
+  ![Update assert](https://i.imgur.com/t3JDrDn.png)
 - `toMatchSnapshot()` utilize para colocar o snapshot num arquivo separado
+
+### O que é um falso positivo?
+
+Independente do valor experado (pode inserir qualquer um) o teste vai passar.
