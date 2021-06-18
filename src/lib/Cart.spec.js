@@ -2,7 +2,7 @@
  * File: Cart.spec.js
  * Project: jest-app
  * Created: Thursday, March 11th 2021, 5:12:26 pm
- * Last Modified: Friday, June 18th 2021, 3:07:00 pm
+ * Last Modified: Friday, June 18th 2021, 3:19:03 pm
  * Copyright © 2021 AMDE Agência
  */
 
@@ -89,6 +89,18 @@ describe('Cart', () => {
       });
       expect(cart.summary()).toMatchSnapshot();
       expect(cart.getTotal().getAmount()).toBeGreaterThan(0);
+    });
+    it('should include formatted amount in the summary', () => {
+      cart.add({
+        product,
+        quantity: 2,
+      });
+      cart.add({
+        product: product1,
+        quantity: 1,
+      });
+
+      expect(cart.summary().formatted).toEqual('€8.26');
     });
     it('should reset the cart properly', () => {
       cart.add({
