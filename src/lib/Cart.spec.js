@@ -2,7 +2,7 @@
  * File: Cart.spec.js
  * Project: jest-app
  * Created: Thursday, March 11th 2021, 5:12:26 pm
- * Last Modified: Thursday, June 17th 2021, 2:17:43 pm
+ * Last Modified: Friday, June 18th 2021, 3:03:28 pm
  * Copyright © 2021 AMDE Agência
  */
 
@@ -171,6 +171,25 @@ describe('Cart', () => {
       });
 
       expect(cart.getTotal().getAmount()).toEqual(263);
+    });
+
+    it('should determine the best discount with two or more conditions', () => {
+      const condition1 = {
+        percentage: 10,
+        minimum: 2,
+      };
+
+      const condition2 = {
+        quantity: 2,
+      };
+
+      cart.add({
+        product,
+        condition: [condition1, condition2],
+        quantity: 5,
+      });
+
+      expect(cart.getTotal().getAmount()).toEqual(789);
     });
   });
 });

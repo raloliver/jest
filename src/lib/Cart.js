@@ -2,7 +2,7 @@
  * File: Cart.js
  * Project: jest-app
  * Created: Thursday, March 11th 2021, 5:12:26 pm
- * Last Modified: Thursday, June 17th 2021, 2:08:07 pm
+ * Last Modified: Friday, June 18th 2021, 3:03:09 pm
  * Copyright © 2021 AMDE Agência
  */
 
@@ -26,6 +26,28 @@ const calculateDiscountByQuantity = (amount, item) => {
   }
 
   return Money({amount: 0});
+};
+
+const calculateDiscount = (amount, quantity, condition) => {
+  const conditionList = Array.isArray(condition) ? condition : [condition];
+
+  const [higherDiscount] = conditionList
+    .map(conditionItem => {
+      if (conditionItem.percentage) {
+        return calculateDiscountByPercentage(amount, {
+          condition: conditionItem,
+          quantity,
+        }).getAmount();
+      } else if (conditionItem.quantity) {
+        return calculateDiscountByQuantity(amount, {
+          condition: conditionItem,
+          quantity,
+        }).getAmount();
+      }
+    })
+    .sort((discount1, discount2) => discount2 - discount1);
+
+  return Money({amount: higherDiscount});
 };
 
 const Money = Dinero;
@@ -76,10 +98,8 @@ export default class Cart {
       const amount = Money({amount: item.quantity * item.product.price});
       let discount = Money({amount: 0});
 
-      if (item.condition?.percentage) {
-        discount = calculateDiscountByPercentage(amount, item);
-      } else if (item.condition?.quantity) {
-        discount = calculateDiscountByQuantity(amount, item);
+      if (item.condition) {
+        discount = calculateDiscount(amount, item.quantity, item.condition);
       }
 
       return acc.add(amount).subtract(discount);
